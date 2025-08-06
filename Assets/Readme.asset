@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Readme
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: eda43ba821d75d046a45209bde150047, type: 3}
-  title: Universal Mobile 2D Template
+  title: Mobile 2D Template
   sections:
-  - heading: Welcome to the Universal Mobile 2D Template
+  - heading: Welcome to the Mobile 2D Template
     text: This template sets up the right Project settings for developing a 2D game
       on mobile. Also it includes some of the recommended packages for developing
       on mobile.
@@ -24,11 +24,11 @@ MonoBehaviour:
   - heading: Forums iOS
     text: 
     linkText: Get answers and support
-    url: https://discussions.unity.com/tag/iOS
+    url: https://forum.unity.com/forums/ios-and-tvos.27/?_ga=2.229741980.1233471755.1632783301-870874885.1598941469
   - heading: Forums Android
     text: 
     linkText: Get answers and support
-    url: https://discussions.unity.com/tag/Android
+    url: https://forum.unity.com/forums/android.30/
   - heading: Bugs
     text: 
     linkText: Report any bugs
