@@ -7,11 +7,8 @@ using NaughtyAttributes;
 
 public class GoogleDocParser : MonoBehaviour
 {
-    [Header("Google Doc CSV URLs (Published)")]
-    [Tooltip("First doc: simple sentences, one per line/cell")]
-    public string gamesDocUrl = "https://docs.google.com/spreadsheets/d/PLACEHOLDER/export?format=csv";
-    [Tooltip("Second doc: sentence, severity (easy, medium, hard)")]
-    public string pledgesDocUrl = "https://docs.google.com/spreadsheets/d/PLACEHOLDER/export?format=csv";
+    private const string GamesDocUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTUEueONmnscDV3UjBhqzwlDOeUr-P_G5bTQhAjyeFSUyCuuhcmD_rKD7R3NFaRyUPsfIIr-psBqrPg/pub?gid=0&single=true&output=csv";
+    private const string PledgesDocUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTUEueONmnscDV3UjBhqzwlDOeUr-P_G5bTQhAjyeFSUyCuuhcmD_rKD7R3NFaRyUPsfIIr-psBqrPg/pub?gid=1330974750&single=true&output=csv";
 
     [Header("Parsed Data")] 
     public List<string> sentences = new List<string>();
@@ -25,8 +22,7 @@ public class GoogleDocParser : MonoBehaviour
         public string sentence;
         public Severity severity;
     }
-
-    // Call this to refresh both docs (e.g. from a button)
+    
     [Button("Refresh Data")]
     public void RefreshAll()
     {
@@ -36,7 +32,7 @@ public class GoogleDocParser : MonoBehaviour
 
     IEnumerator DownloadGamesStrings()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(gamesDocUrl))
+        using (UnityWebRequest www = UnityWebRequest.Get(GamesDocUrl))
         {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
@@ -50,13 +46,12 @@ public class GoogleDocParser : MonoBehaviour
             {
                 sentences.Add(line.Trim());
             }
-            Debug.Log($"Loaded {sentences.Count} sentences.");
         }
     }
 
     IEnumerator DownloadPledges()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(pledgesDocUrl))
+        using (UnityWebRequest www = UnityWebRequest.Get(PledgesDocUrl))
         {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
@@ -77,7 +72,6 @@ public class GoogleDocParser : MonoBehaviour
                 else if (severityStr == "hard") severity = Severity.Hard;
                 sentencesWithSeverity.Add(new Pledge { sentence = sentence, severity = severity });
             }
-            Debug.Log($"Loaded {sentencesWithSeverity.Count} sentences with severity.");
         }
     }
 }
